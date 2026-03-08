@@ -60,3 +60,4 @@ qlib/
 *.model
 *.pth
 *.ckpt
+models/*.txt
