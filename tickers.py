@@ -237,3 +237,22 @@ def is_glc(code: str) -> bool:
 def get_sector(code: str) -> str:
     """Get sector classification for a stock code."""
     return SECTOR_MAPPING.get(code, "Unknown")
+
+
+# =============================================================================
+# Shariah Non-Compliant Tickers
+# =============================================================================
+
+# Known Shariah-non-compliant stocks
+NON_COMPLIANT_TICKERS = {
+    "4162",  # BAT (British American Tobacco)
+    "2629",  # HEINEKEN
+    "2836",  # CARLSBG
+    "4715",  # GENM (Genting Malaysia - gambling)
+    "3182",  # GENTING (gambling)
+}
+
+
+def is_shariah_non_compliant(code: str) -> bool:
+    """Check if ticker is known to be non-Shariah compliant."""
+    return code in NON_COMPLIANT_TICKERS
