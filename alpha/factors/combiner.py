@@ -37,6 +37,7 @@ def compute_all_factors(
     opr_history: Optional[pd.DataFrame] = None,
     shariah_data: Optional[dict] = None,
     glc_spread: Optional[pd.Series] = None,
+    verbose: bool = True,
 ) -> pd.DataFrame:
     """
     Compute all Malaysia-specific factors for a single stock.
@@ -47,6 +48,7 @@ def compute_all_factors(
         opr_history: OPR history DataFrame
         shariah_data: Historical Shariah list data
         glc_spread: Pre-computed GLC spread series
+        verbose: If True, print progress
     
     Returns:
         DataFrame with all factor columns added
@@ -57,27 +59,21 @@ def compute_all_factors(
     df["date"] = pd.to_datetime(df["date"])
     
     # 1. Palm oil beta
-    print(f"  Computing palm oil beta for {ticker}...")
-    df = add_palm_oil_beta_factor(df, window=60)
+    df = add_palm_oil_beta_factor(df, window=60, silent=True)
     
     # 2. FX sensitivity
-    print(f"  Computing FX sensitivity for {ticker}...")
     df = add_fx_sensitivity_factor(df, window=60)
     
     # 3. Shariah factors
-    print(f"  Computing Shariah factors for {ticker}...")
     df = add_shariah_factors(df, ticker, shariah_data)
     
     # 4. GLC factors
-    print(f"  Computing GLC factors for {ticker}...")
     df = add_glc_factors(df, ticker, glc_spread)
     
     # 5. Festive seasonality
-    print(f"  Computing festive seasonality for {ticker}...")
     df = add_festive_factors(df)
     
     # 6. OPR regime
-    print(f"  Computing OPR regime for {ticker}...")
     df = add_opr_factors(df, opr_history)
     
     return df

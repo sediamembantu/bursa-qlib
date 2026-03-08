@@ -50,6 +50,7 @@ def compute_palm_oil_beta(
 def fetch_fcpo_data(
     start_date: str = "2010-01-01",
     end_date: Optional[str] = None,
+    silent: bool = False,
 ) -> pd.DataFrame:
     """
     Fetch FCPO (Crude Palm Oil) futures data.
@@ -57,24 +58,34 @@ def fetch_fcpo_data(
     Uses Yahoo Finance ticker FCPO=F for front-month futures.
     If unavailable, falls back to palm oil ETF or commodity index.
     
+    Args:
+        start_date: Start date string
+        end_date: End date string
+        silent: If True, suppress warning messages
+    
     Returns:
-        DataFrame with date and close columns
+        DataFrame with date and close columns (empty if unavailable)
     """
     try:
         import yfinance as yf
         
         # Try FCPO futures ticker
         ticker = "FCPO=F"
-        df = yf.download(ticker, start=start_date, end=end_date, progress=False)
+        df = yf.download(ticker, start=start_date, end=end_date, progress=False, quiet=True)
         
         if df.empty:
             # Fallback: use palm oil related commodity
-            print("FCPO futures not available, trying alternative...")
             ticker = "PALM=F"  # Alternative palm oil ticker
-            df = yf.download(ticker, start=start_date, end=end_date, progress=False)
+            df = yf.download(ticker, start=start_date, end=end_date, progress=False, quiet=True)
         
         if df.empty:
-            print("Warning: No palm oil data available")
+            # Fallback: Wilmar International (palm oil major)
+            ticker = "WLIL.SI"  # Singapore listed
+            df = yf.download(ticker, start=start_date, end=end_date, progress=False, quiet=True)
+        
+        if df.empty:
+            if not silent:
+                print("  Warning: Palm oil data unavailable, factor set to NaN")
             return pd.DataFrame()
         
         # Flatten MultiIndex if present
@@ -87,7 +98,8 @@ def fetch_fcpo_data(
         return df[["date", "close"]]
         
     except Exception as e:
-        print(f"Error fetching FCPO data: {e}")
+        if not silent:
+            print(f"  Warning: Could not fetch FCPO data: {e}")
         return pd.DataFrame()
 
 
@@ -109,6 +121,7 @@ def compute_fcpo_returns(
 def add_palm_oil_beta_factor(
     price_df: pd.DataFrame,
     window: int = 60,
+    silent: bool = False,
 ) -> pd.DataFrame:
     """
     Add palm oil beta factor to price DataFrame.
@@ -116,6 +129,7 @@ def add_palm_oil_beta_factor(
     Args:
         price_df: DataFrame with date, close columns
         window: Rolling window for beta calculation
+        silent: If True, suppress messages
     
     Returns:
         DataFrame with added 'palm_oil_beta' column
@@ -124,6 +138,7 @@ def add_palm_oil_beta_factor(
     fcpo_df = fetch_fcpo_data(
         start_date=str(price_df["date"].min().date()),
         end_date=str(price_df["date"].max().date()),
+        silent=silent,
     )
     
     if fcpo_df.empty:
