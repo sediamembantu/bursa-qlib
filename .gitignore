@@ -34,6 +34,7 @@ ENV/
 
 # Data (large files - don't commit)
 data/raw/
+data/processed/
 data/qlib/
 *.csv
 *.parquet
