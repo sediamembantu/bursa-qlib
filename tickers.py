@@ -1,113 +1,122 @@
 """
 Ticker definitions for Bursa Malaysia universe.
 KLCI-30 constituents and extended Main Market stocks.
+
+Yahoo Finance uses stock codes (e.g., 1155.KL) not ticker names.
 """
 
 from config import YF_SUFFIX
 
 # =============================================================================
 # KLCI-30 Constituents (as of 2026)
+# Format: {YAHOO_CODE: LOCAL_NAME}
 # =============================================================================
 
-KLCI30 = [
+KLCI30_CODES = {
     # Financials
-    "MAYANG",       # Maybank
-    "PBBANK",       # Public Bank
-    "CIMB",         # CIMB Group
-    "RHBBANK",      # RHB Bank
-    "AMBANK",       # AmBank Group
+    "1155": "MAYBANK",
+    "1295": "PBBANK",
+    "1023": "CIMB",
+    "1066": "RHBBANK",
+    "5398": "AMBANK",
+    "5819": "HLBANK",
+    "1082": "HLFG",
     
     # Telecommunications
-    "MAXIS",        # Maxis
-    "DIGI",         # Digi.com
-    "TM",           # Telekom Malaysia
-    "AXIATA",       # Axiata Group
+    "6012": "MAXIS",
+    "6947": "DIGI",
+    "4863": "TM",
+    "6888": "AXIATA",
     
     # Plantations
-    "IOICORP",      # IOI Corporation
-    "SIME",         # Sime Darby Plantation
-    "KLK",          # Kuala Lumpur Kepong
-    
-    # Banking & Finance (continued)
-    "HLBANK",       # Hong Leong Bank
-    "HLFG",         # Hong Leong Financial Group
+    "1961": "IOICORP",
+    "5285": "SIME",
+    "2445": "KLK",
     
     # Consumer
-    "NESTLE",       # Nestle Malaysia
-    "DLADY",        # Dutch Lady Milk
-    "F&N",          # Fraser & Neave
+    "4707": "NESTLE",
+    "1817": "DLADY",
+    "3689": "F&N",
     
-    # Utilities
-    "TENAGA",       # Tenaga Nasional
-    "DIALOG",       # Dialog Group
+    # Utilities & Energy
+    "5347": "TENAGA",
+    "7277": "DIALOG",
+    "6033": "PETGAS",
+    "5183": "PCHEM",
     
-    # Industrial
-    "PETRONAS",     # Petronas Gas
-    "PCHEM",        # Petronas Chemicals
-    "GENTING",      # Genting Berhad
-    "GENM",         # Genting Malaysia
+    # Industrial & Gaming
+    "3182": "GENTING",
+    "4715": "GENM",
     
-    # Property
-    "UMW",          # UMW Holdings
+    # Conglomerates
+    "4588": "UMW",
     
     # Technology
-    "INARI",        # Inari Amertron
-    "VITROX",       # Vitrox Corp
+    "0166": "INARI",
+    "0097": "VITROX",
     
     # Healthcare
-    "IHH",          # IHH Healthcare
+    "6683": "IHH",
     
     # Construction
-    "GAMUDA",       # Gamuda
-    "MRCB",         # Malaysia Building Society
-]
+    "5398": "GAMUDA",
+}
+
+# List of Yahoo codes for KLCI-30
+KLCI30 = list(KLCI30_CODES.keys())
 
 
 # =============================================================================
 # Extended Universe (Liquid Main Market Stocks)
 # =============================================================================
 
-EXTENDED_UNIVERSE = [
+EXTENDED_CODES = {
     # Additional financials
-    "AFFIN", "BAF", "BPPLAB", "LPI",
+    "5099": "AFFIN",
+    "6888": "LPI",
     
     # Plantations
-    "SDPLANT", "FIMACORP", "SARAWAK",
+    "2125": "FIMACORP",
     
     # Property
-    "SPSETIA", "MAHSING", "UEMS", "ECOWLD", "IOIPROP", "TAMBUN",
+    "5204": "SPSETIA",
+    "3087": "MAHSING",
+    "1773": "UEMS",
+    "8206": "ECOWLD",
     
     # Construction
-    "IJM", "SUNCON", "GADANG", "WEIDA",
+    "3336": "IJM",
+    "5398": "SUNCON",
     
-    # Industrial
-    "HARTA", "TOPGLOV", "KOSSAN", "SUPERMX",  # Glove sector
-    "PADINI", "FIPPER", "MRDIY",
+    # Industrial - Gloves
+    "5168": "HARTA",
+    "7113": "TOPGLOV",
+    "7153": "KOSSAN",
     
     # Technology
-    "PENTA", "NOTION", "UNISEM", "MPI", "GREATEC",
+    "7106": "PENTA",
+    "0084": "NOTION",
+    "5006": "UNISEM",
+    "3872": "MPI",
+    "0183": "GREATEC",
     
     # Consumer
-    "QL", "LEONGHUP", "LAYHONG", "APOLLO", "HUPSENG",
+    "7081": "QL",
+    "3222": "PADINI",
+    "5284": "MRDIY",
     
     # Energy
-    "PETDAG", "PETRONM", "SEALINK",
+    "5681": "PETDAG",
+    "3043": "PETRONM",
     
     # Telecommunications
-    "TIMECOM", "CNASIA",
+    "5113": "TIMECOM",
     
-    # Transport & Logistics
-    "POS", "TAS", "WESTPORT",
-    
-    # Healthcare
-    "PHARMA", "DKSH", "APEX",
-    
-    # Media
-    "MEDIA", "STAR",
-    
-    # Others
-    "BAT", "JTINTER", "HEINEKEN", "CARLSBG", "FRASER", "MRCB",
-]
+    # Tobacco & Beverage
+    "4162": "BAT",
+    "2629": "HEINEKEN",
+    "2836": "CARLSBG",
+}
 
 
 # =============================================================================
@@ -116,16 +125,24 @@ EXTENDED_UNIVERSE = [
 
 GLC_COMPANIES = {
     # Khazanah-backed
-    "MAYANG", "CIMB", "AXIATA", "TM", "TENAGA", "IHH", "UEMS", "MAHB",
+    "1155": "MAYBANK",  # Maybank
+    "1023": "CIMB",
+    "6888": "AXIATA",
+    "4863": "TM",
+    "5347": "TENAGA",
+    "6683": "IHH",
+    "1773": "UEMS",
     
     # PNB-backed
-    "PBBANK", "SIME", "MAYANG", "UMW", "SPSETIA",
+    "1295": "PBBANK",
+    "5285": "SIME",
+    "4588": "UMW",
+    "5204": "SPSETIA",
     
-    # EPF-backed
-    "MAYANG", "CIMB", "PBBANK", "TENAGA",
-    
-    # Other GLCs
-    "PETRONAS", "PCHEM", "PETDAG", "MRCB",
+    # Petronas
+    "6033": "PETGAS",
+    "5183": "PCHEM",
+    "5681": "PETDAG",
 }
 
 
@@ -135,55 +152,54 @@ GLC_COMPANIES = {
 
 SECTOR_MAPPING = {
     # Financials
-    "MAYANG": "Financials", "PBBANK": "Financials", "CIMB": "Financials",
-    "RHBBANK": "Financials", "AMBANK": "Financials", "HLBANK": "Financials",
-    "HLFG": "Financials", "AFFIN": "Financials", "BAF": "Financials",
-    "LPI": "Financials",
+    "1155": "Financials", "1295": "Financials", "1023": "Financials",
+    "1066": "Financials", "5398": "Financials", "5819": "Financials",
+    "1082": "Financials", "5099": "Financials", "6888": "Financials",
     
     # Telecommunications
-    "MAXIS": "Telecommunications", "DIGI": "Telecommunications",
-    "TM": "Telecommunications", "AXIATA": "Telecommunications",
-    "TIMECOM": "Telecommunications",
+    "6012": "Telecommunications", "6947": "Telecommunications",
+    "4863": "Telecommunications", "6888": "Telecommunications",
+    "5113": "Telecommunications",
     
     # Plantations
-    "IOICORP": "Plantations", "SIME": "Plantations", "KLK": "Plantations",
-    "SDPLANT": "Plantations", "FIMACORP": "Plantations",
+    "1961": "Plantations", "5285": "Plantations", "2445": "Plantations",
+    "2125": "Plantations",
     
     # Consumer
-    "NESTLE": "Consumer Staples", "DLADY": "Consumer Staples",
-    "F&N": "Consumer Staples", "PADINI": "Consumer Discretionary",
-    "MRDIY": "Consumer Discretionary", "QL": "Consumer Staples",
+    "4707": "Consumer Staples", "1817": "Consumer Staples",
+    "3689": "Consumer Staples", "3222": "Consumer Discretionary",
+    "5284": "Consumer Discretionary", "7081": "Consumer Staples",
     
-    # Utilities
-    "TENAGA": "Utilities", "DIALOG": "Energy",
-    
-    # Energy
-    "PETRONAS": "Energy", "PCHEM": "Energy", "PETDAG": "Energy",
-    "PETRONM": "Energy",
+    # Utilities & Energy
+    "5347": "Utilities", "7277": "Energy",
+    "6033": "Energy", "5183": "Energy", "5681": "Energy",
+    "3043": "Energy",
     
     # Industrial
-    "GENTING": "Consumer Discretionary", "GENM": "Consumer Discretionary",
-    "HARTA": "Healthcare", "TOPGLOV": "Healthcare", "KOSSAN": "Healthcare",
+    "3182": "Consumer Discretionary", "4715": "Consumer Discretionary",
+    "5168": "Healthcare", "7113": "Healthcare", "7153": "Healthcare",
     
     # Technology
-    "INARI": "Technology", "VITROX": "Technology", "PENTA": "Technology",
-    "NOTION": "Technology", "UNISEM": "Technology", "MPI": "Technology",
-    "GREATEC": "Technology",
+    "0166": "Technology", "0097": "Technology", "7106": "Technology",
+    "0084": "Technology", "5006": "Technology", "3872": "Technology",
+    "0183": "Technology",
     
     # Healthcare
-    "IHH": "Healthcare", "PHARMA": "Healthcare",
+    "6683": "Healthcare",
     
     # Construction
-    "GAMUDA": "Industrials", "MRCB": "Industrials", "IJM": "Industrials",
-    "SUNCON": "Industrials",
+    "5398": "Industrials", "3336": "Industrials",
+    
+    # Conglomerates
+    "4588": "Industrials",
     
     # Property
-    "UMW": "Industrials", "SPSETIA": "Real Estate", "MAHSING": "Real Estate",
-    "UEMS": "Real Estate", "ECOWLD": "Real Estate",
+    "5204": "Real Estate", "3087": "Real Estate",
+    "1773": "Real Estate", "8206": "Real Estate",
     
     # Tobacco & Beverage
-    "BAT": "Consumer Staples", "HEINEKEN": "Consumer Staples",
-    "CARLSBG": "Consumer Staples",
+    "4162": "Consumer Staples", "2629": "Consumer Staples",
+    "2836": "Consumer Staples",
 }
 
 
@@ -191,28 +207,33 @@ SECTOR_MAPPING = {
 # Helper Functions
 # =============================================================================
 
-def get_yahoo_ticker(ticker: str) -> str:
-    """Convert Bursa ticker to Yahoo Finance format."""
-    return f"{ticker}{YF_SUFFIX}"
+def get_yahoo_ticker(code: str) -> str:
+    """Convert Bursa stock code to Yahoo Finance format."""
+    return f"{code}{YF_SUFFIX}"
+
+
+def get_local_name(code: str) -> str:
+    """Get local name for a stock code."""
+    return KLCI30_CODES.get(code, EXTENDED_CODES.get(code, "Unknown"))
 
 
 def get_all_tickers(universe: str = "klci30") -> list[str]:
-    """Get all tickers for a given universe."""
+    """Get all stock codes for a given universe."""
     if universe == "klci30":
         return KLCI30
     elif universe == "extended":
-        return KLCI30 + EXTENDED_UNIVERSE
+        return list(set(KLCI30 + list(EXTENDED_CODES.keys())))
     elif universe == "all":
-        return list(set(KLCI30 + EXTENDED_UNIVERSE))
+        return list(set(KLCI30 + list(EXTENDED_CODES.keys())))
     else:
         raise ValueError(f"Unknown universe: {universe}")
 
 
-def is_glc(ticker: str) -> bool:
+def is_glc(code: str) -> bool:
     """Check if a company is a Government-Linked Company."""
-    return ticker in GLC_COMPANIES
+    return code in GLC_COMPANIES
 
 
-def get_sector(ticker: str) -> str:
-    """Get sector classification for a ticker."""
-    return SECTOR_MAPPING.get(ticker, "Unknown")
+def get_sector(code: str) -> str:
+    """Get sector classification for a stock code."""
+    return SECTOR_MAPPING.get(code, "Unknown")

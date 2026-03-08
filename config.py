@@ -60,13 +60,10 @@ BNM_ENDPOINTS = {
 # OpenDOSM base URL (parquet files)
 OPENDOSM_BASE = "https://storage.dosm.gov.my"
 
-# OpenDOSM datasets
+# OpenDOSM datasets (verified working)
 OPENDOSM_DATASETS = {
-    "gdp": "gdp/gdp_monthly.parquet",
-    "cpi": "cpi/cpi.parquet",
+    "gdp": "gdp/gdp.parquet",
     "ipi": "ipi/ipi.parquet",
-    "trade": "trade/trade_msic.parquet",
-    "labour": "labour/labourforce.parquet",
 }
 
 # =============================================================================
