@@ -1,0 +1,75 @@
+# LightGBM Model Configuration
+
+model:
+  class: LGBModel
+  module_path: qlib.contrib.model.gbdt
+
+model_kwargs:
+  # Core parameters
+  num_leaves: 31
+  learning_rate: 0.05
+  n_estimators: 200
+  max_depth: 6
+  min_child_samples: 20
+  
+  # Regularization
+  reg_alpha: 0.1
+  reg_lambda: 0.1
+  
+  # Feature sampling
+  feature_fraction: 0.8
+  bagging_fraction: 0.8
+  bagging_freq: 5
+  
+  # Objective
+  objective: regression
+  metric: mse
+  
+  # Performance
+  n_jobs: -1
+  verbosity: -1
+  random_state: 42
+
+# Training settings
+training:
+  # Loss function
+  loss: mse
+  
+  # Label settings
+  label:
+    name: Ref($close, -2) / $close - 1  # 2-day forward return
+    dtype: float32
+  
+  # Feature settings
+  features:
+    - Alpha158  # Standard Qlib features
+    - palm_oil_beta
+    - fx_sensitivity
+    - shariah_compliant
+    - shariah_event
+    - glc_flag
+    - glc_spread
+    - cny_window
+    - hari_raya_window
+    - year_end
+    - opr_rate
+    - opr_regime
+  
+  # Data split
+  split:
+    train_end: "2022-12-31"
+    valid_start: "2023-01-01"
+    test_start: "2024-01-01"
+  
+  # Early stopping
+  early_stopping_rounds: 50
+  
+# Hyperparameter tuning (optional)
+tuning:
+  enabled: false
+  n_trials: 50
+  params:
+    num_leaves: [15, 31, 63]
+    learning_rate: [0.01, 0.05, 0.1]
+    max_depth: [4, 6, 8]
+    feature_fraction: [0.6, 0.8, 1.0]
