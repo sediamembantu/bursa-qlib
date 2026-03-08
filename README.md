@@ -155,7 +155,7 @@ bursa-qlib/
 
 ## Performance Summary
 
-### Variant A: Custom Pipeline
+### Variant A: Custom Pipeline ✅ Winner
 
 | Strategy | Return | Sharpe | Max DD | Volatility |
 |----------|--------|--------|--------|------------|
@@ -165,7 +165,21 @@ bursa-qlib/
 
 ### Variant B: qlib Pipeline
 
-*Coming soon — will compare against Variant A*
+| Strategy | Return | Sharpe | Max DD | Volatility |
+|----------|--------|--------|--------|------------|
+| Alpha158 + MY factors | -19.22% | -0.08 | -56.28% | 15.91% |
+
+### Comparison
+
+| Metric | Variant A | Variant B | Winner |
+|--------|-----------|-----------|--------|
+| Return | +4.74% | -19.22% | **A** |
+| Sharpe | 0.37 | -0.08 | **A** |
+| Max DD | -4.86% | -56.28% | **A** |
+
+**Conclusion:** Domain-specific features outperform generic Alpha158 for Bursa Malaysia.
+
+See [Variant Comparison](docs/VARIANT_COMPARISON.md) for detailed analysis.
 
 ## Key Findings
 
