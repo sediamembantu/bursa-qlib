@@ -22,7 +22,7 @@ import sys
 from datetime import datetime, timedelta
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from config import PRICES_DIR, RANDOM_SEED
 from tickers import KLCI30_CODES, get_local_name, get_sector
