@@ -6,9 +6,14 @@ Generates trading calendar excluding:
 - Malaysian public holidays
 """
 
-import pandas as pd
-from datetime import date
+import sys
 from pathlib import Path
+
+import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from config import QLIB_DIR
 
 # Malaysian public holidays (2020-2026)
 # Major holidays that affect trading
@@ -28,7 +33,7 @@ MALAYSIAN_HOLIDAYS = [
     "2024-10-31",  # Deepavali
     "2024-11-01",  # Deepavali (some states)
     "2024-12-25",  # Christmas
-    
+
     # 2025 (projected)
     "2025-01-01",  # New Year
     "2025-01-29",  # Chinese New Year
@@ -42,7 +47,7 @@ MALAYSIAN_HOLIDAYS = [
     "2025-09-16",  # Malaysia Day
     "2025-10-20",  # Deepavali (projected)
     "2025-12-25",  # Christmas
-    
+
     # 2026 (projected)
     "2026-01-01",  # New Year
     "2026-02-17",  # Chinese New Year (projected)
@@ -65,45 +70,45 @@ def generate_calendar(
 ) -> pd.DatetimeIndex:
     """
     Generate Bursa Malaysia trading calendar.
-    
+
     Args:
         start_date: Start date
         end_date: End date
-    
+
     Returns:
         DatetimeIndex of trading days
     """
     # Generate all weekdays
     all_dates = pd.date_range(start=start_date, end=end_date, freq="B")
-    
+
     # Convert holidays to datetime
     holidays = pd.to_datetime(MALAYSIAN_HOLIDAYS)
-    
+
     # Filter out holidays
     trading_days = all_dates[~all_dates.isin(holidays)]
-    
+
     return trading_days
 
 
 def save_calendar(output_dir: Path = None):
     """Save calendar to qlib format."""
     if output_dir is None:
-        output_dir = Path(__file__).parent.parent.parent / "data" / "qlib" / "calendars"
-    
+        output_dir = QLIB_DIR / "calendars"
+
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     calendar = generate_calendar()
-    
+
     # qlib calendar format: one date per line (YYYY-MM-DD)
     output_file = output_dir / "day.txt"
-    
+
     with open(output_file, "w") as f:
         for date in calendar:
             f.write(date.strftime("%Y-%m-%d") + "\n")
-    
+
     print(f"Calendar saved: {output_file}")
     print(f"Trading days: {len(calendar)}")
-    
+
     return output_file
 
 

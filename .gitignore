@@ -22,11 +22,14 @@ wheels/
 
 # Virtual environments
 .venv/
+.venv-*/
 venv/
 ENV/
 
 # uv
 .uv/
+.uv-cache/
+.pytest_cache/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -54,7 +57,7 @@ logs/*.log
 Thumbs.db
 
 # Qlib
-qlib/
+/qlib/
 *.pkl
 
 # Models (trained)

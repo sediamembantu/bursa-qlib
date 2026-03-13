@@ -1,5 +1,4 @@
 # Core dependencies
-qlib>=0.9
 yfinance>=0.2
 pandas>=2.0
 numpy>=1.24
@@ -15,3 +14,6 @@ pyyaml>=6.0
 # Dashboard
 streamlit>=1.28
 plotly>=5.18
+
+# Optional future integration
+# pyqlib>=0.9 ; python_version < "3.13"
