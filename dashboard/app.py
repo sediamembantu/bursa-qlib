@@ -50,6 +50,8 @@ def load_price_data():
     price_data = {}
     for csv_file in PRICES_DIR.glob("*.csv"):
         ticker = csv_file.stem
+        if ticker == "combined_prices":
+            continue
         df = pd.read_csv(csv_file)
         df["date"] = pd.to_datetime(df["date"])
         price_data[ticker] = df
