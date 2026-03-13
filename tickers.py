@@ -18,7 +18,7 @@ KLCI30_CODES = {
     "1295": "PBBANK",
     "1023": "CIMB",
     "1066": "RHBBANK",
-    "5398": "AMBANK",
+    "1015": "AMBANK",
     "5819": "HLBANK",
     "1082": "HLFG",
     
@@ -56,7 +56,7 @@ KLCI30_CODES = {
     "0097": "VITROX",
     
     # Healthcare
-    "6683": "IHH",
+    "5225": "IHH",
     
     # Construction
     "5398": "GAMUDA",
@@ -73,7 +73,7 @@ KLCI30 = list(KLCI30_CODES.keys())
 EXTENDED_CODES = {
     # Additional financials
     "5099": "AFFIN",
-    "6888": "LPI",
+    "8621": "LPI",
     
     # Plantations
     "2125": "FIMACORP",
@@ -103,7 +103,7 @@ EXTENDED_CODES = {
     # Consumer
     "7081": "QL",
     "3222": "PADINI",
-    "5284": "MRDIY",
+    "5296": "MRDIY",
     
     # Energy
     "5681": "PETDAG",
@@ -130,7 +130,7 @@ GLC_COMPANIES = {
     "6888": "AXIATA",
     "4863": "TM",
     "5347": "TENAGA",
-    "6683": "IHH",
+    "5225": "IHH",
     "1773": "UEMS",
     
     # PNB-backed
@@ -153,8 +153,8 @@ GLC_COMPANIES = {
 SECTOR_MAPPING = {
     # Financials
     "1155": "Financials", "1295": "Financials", "1023": "Financials",
-    "1066": "Financials", "5398": "Financials", "5819": "Financials",
-    "1082": "Financials", "5099": "Financials", "6888": "Financials",
+    "1066": "Financials", "1015": "Financials", "5819": "Financials",
+    "1082": "Financials", "5099": "Financials", "8621": "Financials",
     
     # Telecommunications
     "6012": "Telecommunications", "6947": "Telecommunications",
@@ -168,7 +168,7 @@ SECTOR_MAPPING = {
     # Consumer
     "4707": "Consumer Staples", "1817": "Consumer Staples",
     "3689": "Consumer Staples", "3222": "Consumer Discretionary",
-    "5284": "Consumer Discretionary", "7081": "Consumer Staples",
+    "5296": "Consumer Discretionary", "7081": "Consumer Staples",
     
     # Utilities & Energy
     "5347": "Utilities", "7277": "Energy",
@@ -185,7 +185,7 @@ SECTOR_MAPPING = {
     "0183": "Technology",
     
     # Healthcare
-    "6683": "Healthcare",
+    "5225": "Healthcare",
     
     # Construction
     "5398": "Industrials", "3336": "Industrials",
